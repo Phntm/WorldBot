@@ -8,5 +8,9 @@
   "engines": {
     "node": "0.10.x",
     "npm": "1.2.x"
+  },
+  "subdomain": "worldbot",
+  "scripts": {
+    "start": "node server.js"
   }
 }

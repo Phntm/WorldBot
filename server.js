@@ -1,8 +1,8 @@
 // Config and Server Details
 var config = {
-	channels: ["#phntm","#worldcoin"],
+	channels: ["#phntm"],
 	server: "irc.freenode.net",
-	botName: "WorldBot"
+	botName: "WorldBotLocal"
 };
 
 // Require the libraries
@@ -28,6 +28,21 @@ bot.addListener('message', function(from, to, message) {
         bot.say(to, 'To check the price of BTC, just say "!btc". To check the price of WDC, just say "!wdc".');
     }
 });
+
+//Hourly announcing of Bitcoin prices
+function announce ( )
+{
+    $.getJSON("http://data.mtgox.com/api/2/BTCUSD/money/ticker_fast", function(data) {
+    var gox = data;
+    var goxprice = data.data.last.display;
+    $.getJSON("https://www.bitstamp.net/api/ticker/", function(data) {
+    var bit = data;
+    var bitprice = data.ask;
+    bot.say(to, "Hourly Update: 1 BTC in USD currently costs " + goxprice + " on MtGox and $" + bitprice + " on BitStamp.");
+});
+});
+}
+setInterval ( "announce()", 3600000 );
 
 //Listen for mentions
 bot.addListener('message', function(from, to, message) {
