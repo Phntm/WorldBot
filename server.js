@@ -1,6 +1,6 @@
 // Config and Server Details
 var config = {
-	channels: ["#phntm", "#worldcoin"],
+	channels: ["#phntm"],
 	server: "irc.freenode.net",
 	botName: "CoinBot"
 };
@@ -68,7 +68,7 @@ bot.addListener('message', function(from, to, message) {
     ) {
     $.getJSON("http://pubapi.cryptsy.com/api.php?method=singleorderdata&marketid=14", function(data) {
     var wdc = data;
-    console.log(result["wdc"].WDC.sellorders[0]);
+    console.log(result["data"].WDC.sellorders[0]);
     bot.say(to, "1 WDC currently trades for SOME FUCKING AMOUNT OF MONEY GO LOOK IT UP");
 });
     }
