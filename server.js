@@ -15,17 +15,6 @@ var bot = new irc.Client(config.server, config.botName, {
     port: 8001
 });
 
-//Listen for PMs from me to join a channel
-bot.addListener('pm', function(nick, text, message) {
-    if(  nick.indexOf('Phntm') > -1
-    ) {
-        if(  message.indexOf('#') > -1
-    ) {
-        bot.join(message);
-        }
-    }
-});
-
 //Listen for channel kicks
 bot.addListener('kick', function(channel, nick, by, reason, message) {
 
