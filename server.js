@@ -8,17 +8,6 @@ var config = {
 // Require the libraries
 var irc = require("irc");
 var $ = require('jquery');
-var parser = require('xml2json');
-
-//xml2json Options
-var options = {
-    object: true,
-    reversible: false,
-    coerce: true,
-    sanitize: true,
-    trim: true,
-    arrayNotation: false
-};
 
 // Create the bot's skeleton
 var bot = new irc.Client(config.server, config.botName, {
@@ -90,23 +79,5 @@ bot.addListener('message', function(from, to, message) {
     bot.say(to, "1 WDC currently trades for " + wdcprice + "BTC on Cryptsy. Therefore, 1 USD is equal to " + wdcusd + "WDC at Bitstamp prices.");
 });
 });
-    }
-});
-
-//WDC MCXnow Price Check Command
-bot.addListener('message', function(from, to, message) {
-    if(  message.indexOf('!mcx') > -1
-    || message.indexOf('!Mcx') > -1
-    || message.indexOf('!MCX') > -1
-    ) {
-    $.ajax({
-        type: "GET",
-        url: "https://mcxnow.com/orders?cur=WDC",
-        dataType: "xml",
-        success: function(xml) {
-            var JSON = parser.toJson(xml);
-            bot.say(to, JSON.doc.buy[0]);
-        }
-    });
     }
 });
