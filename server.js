@@ -76,7 +76,7 @@ bot.addListener('message', function(from, to, message) {
     var mbtcusdinBTC = bitprice*0.00001;
     var wdcusd = mbtcusdinBTC/wdcprice;
     wdcusd = wdcusd.toFixed(2);
-    bot.say(to, "1 WDC currently trades for " + wdcprice + "BTC on Cryptsy. Therefore, 1 USD is equal to " + wdcusd + "WDC.");
+    bot.say(to, "1 WDC currently trades for " + wdcprice + "BTC on Cryptsy. Therefore, 1 USD is equal to " + wdcusd + "WDC at Bitstamp prices.");
 });
 });
     }
