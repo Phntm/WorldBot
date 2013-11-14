@@ -2,7 +2,7 @@
 var config = {
 	channels: ["#phntm","#worldcoin"],
 	server: "irc.freenode.net",
-	botName: "CoinBot"
+	botName: "WorldBot"
 };
 
 // Require the libraries
