@@ -1,6 +1,6 @@
 // Config and Server Details
 var config = {
-	channels: ["#phntm"],
+	channels: ["#phntm","#worldcoin"],
 	server: "irc.freenode.net",
 	botName: "WorldBot"
 };
@@ -92,23 +92,6 @@ bot.addListener('message', function(from, to, message) {
 });
     }
 });
-
-//Announce bitcoin price every hour, 3600000 ms in one hour
-setInterval ("announce()", 5000);
-function announce() {
-  $.getJSON("http://data.mtgox.com/api/2/BTCUSD/money/ticker_fast", function(data) {
-    var gox = data;
-    var goxprice = data.data.last.display;
-        $.getJSON("https://www.bitstamp.net/api/ticker/", function(data) {
-    var bit = data;
-    var bitprice = data.ask;
-    var mbtcp = bitprice*0.01;
-    mbtcp = mbtcp.toFixed(3);
-    bot.say(to, "Hourly Update: 1 BTC in USD currently costs " + goxprice + " on MtGox and $" + bitprice + " on BitStamp.");
-});
-});
-}
-}
 
 //WDC MCXnow Price Check Command
 bot.addListener('message', function(from, to, message) {
