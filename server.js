@@ -25,7 +25,7 @@ bot.addListener('kick', function(channel, nick, by, reason, message) {
 bot.addListener('message', function(from, to, message) {
     if(  message.indexOf('!help') > -1
     ) {
-        bot.say(to, 'To check the price of BTC, just say "!btc". To check the price of WDC, just say "!wdc".');
+        bot.say(to, 'To check the prices of BTC, LTC, or WDC, just say !btc, !ltc, or !wdc.');
     }
 });
 
@@ -77,6 +77,27 @@ bot.addListener('message', function(from, to, message) {
     var wdcusd = mbtcusdinBTC/wdcprice;
     wdcusd = wdcusd.toFixed(2);
     bot.say(to, "1 WDC currently trades for " + wdcprice + "BTC on Cryptsy. Therefore, 1 USD is equal to " + wdcusd + "WDC at Bitstamp prices.");
+});
+});
+    }
+});
+
+//LTC Price Check Command
+bot.addListener('message', function(from, to, message) {
+    if(  message.indexOf('!ltc') > -1
+    || message.indexOf('!LTC') > -1
+    || message.indexOf('!Ltc') > -1
+    ) {
+    $.getJSON("http://pubapi.cryptsy.com/api.php?method=singleorderdata&marketid=3", function(data) {
+    var ltc = data;
+    var ltcprice = data["return"].LTC.buyorders[0].price;
+    $.getJSON("https://www.bitstamp.net/api/ticker/", function(data) {
+    var bit = data;
+    var bitprice = data.ask;
+    var mbtcusdinBTC = bitprice*0.00001;
+    var ltcusd = mbtcusdinBTC/ltcprice;
+    ltcusd = ltcusd.toFixed(2);
+    bot.say(to, "1 LTC currently trades for " + ltcprice + "BTC on Cryptsy. Therefore, 1 USD is equal to " + ltcusd + "LTC at Bitstamp prices.");
 });
 });
     }
