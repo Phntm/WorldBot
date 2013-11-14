@@ -69,7 +69,7 @@ bot.addListener('message', function(from, to, message) {
     ) {
     $.getJSON("http://pubapi.cryptsy.com/api.php?method=singleorderdata&marketid=14", function(data) {
     var wdc = data;
-    var wdcprice = data["return"].WDC.sellorders[0].price;
+    var wdcprice = data["return"].WDC.buyorders[0].price;
     $.getJSON("https://www.bitstamp.net/api/ticker/", function(data) {
     var bit = data;
     var bitprice = data.ask;
