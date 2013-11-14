@@ -1,6 +1,6 @@
 {
-  "name": "CoinBot",
-  "version": "0.0.1",
+  "name": "WorldBot",
+  "version": "1.0",
   "dependencies": {
     "irc": "0.3.6",
     "jquery": "1.8.3"
