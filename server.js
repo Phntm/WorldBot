@@ -31,12 +31,12 @@ bot.addListener('message', function(from, to, message) {
 
 //Listen for mentions
 bot.addListener('message', function(from, to, message) {
-    if(  message.indexOf('CoinBot') > -1
-    || message.indexOf('coinbot') > -1
-    || message.indexOf('Coinbot') > -1
-    || message.indexOf('COINBOT') > -1
+    if(  message.indexOf('WorldBot') > -1
+    || message.indexOf('worldbot') > -1
+    || message.indexOf('Worldbot') > -1
+    || message.indexOf('WORLDBOT') > -1
     ) {
-        bot.say(to, 'Hey there, my name is CoinBot!');
+        bot.say(to, 'Hey there, my name is WorldBot!');
     }
 });
 
