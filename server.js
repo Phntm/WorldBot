@@ -1,6 +1,6 @@
 // Config and Server Details
 var config = {
-	channels: ["#phntm"],
+	channels: ["#phntm","#worldcoin"],
 	server: "irc.freenode.net",
 	botName: "CoinBot"
 };
@@ -54,6 +54,7 @@ bot.addListener('message', function(from, to, message) {
     var bit = data;
     var bitprice = data.ask;
     var mbtcp = bitprice*0.01;
+    mbtcp = mbtcp.toFixed(3);
     bot.say(to, "1 BTC in USD currently costs " + goxprice + " on MtGox and $" + bitprice + " on BitStamp. Therefore, 1 USD is equal to " + mbtcp + "mBTC.");
 });
 });
@@ -68,8 +69,16 @@ bot.addListener('message', function(from, to, message) {
     ) {
     $.getJSON("http://pubapi.cryptsy.com/api.php?method=singleorderdata&marketid=14", function(data) {
     var wdc = data;
-    console.log(result["data"].WDC.sellorders[0]);
-    bot.say(to, "1 WDC currently trades for SOME FUCKING AMOUNT OF MONEY GO LOOK IT UP");
+    var wdcprice = data["return"].WDC.sellorders[0].price;
+    wdcprice = wdcprice.toFixed(7);
+    $.getJSON("https://www.bitstamp.net/api/ticker/", function(data) {
+    var bit = data;
+    var bitprice = data.ask;
+    var mbtcusdinBTC = bitprice*0.00001;
+    var wdcusd = mbtcusdinBTC/wdcprice;
+    wdcusd = wdcusd.toFixed(2);
+    bot.say(to, "1 WDC currently trades for " + wdcprice + "BTC on Cryptsy. Therefore, 1 USD is equal to " + wdcusd + "WDC.");
+});
 });
     }
 });
