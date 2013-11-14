@@ -68,7 +68,7 @@ bot.addListener('message', function(from, to, message) {
     ) {
     $.getJSON("http://pubapi.cryptsy.com/api.php?method=singleorderdata&marketid=14", function(data) {
     var wdc = data;
-    var wdcprice =  data.return.WDC.sellorders.price;
+    console.log(result["wdc"].WDC.sellorders[0]);
     bot.say(to, "1 WDC currently trades for SOME FUCKING AMOUNT OF MONEY GO LOOK IT UP");
 });
     }
