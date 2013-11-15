@@ -25,7 +25,7 @@ bot.addListener('kick', function(channel, nick, by, reason, message) {
 bot.addListener('message', function(from, to, message) {
     if(  message.indexOf('!help') > -1
     ) {
-        bot.say(to, 'To check the prices of BTC, LTC, or WDC, just say !btc, !ltc, or !wdc.');
+        bot.say(to, 'To check the prices of BTC, LTC, XPM, FTC, or WDC, just say !btc, !ltc, !xpm, !ftc or !wdc.');
     }
 });
 
@@ -98,6 +98,48 @@ bot.addListener('message', function(from, to, message) {
     var ltcusd = mbtcusdinBTC/ltcprice;
     ltcusd = ltcusd.toFixed(2);
     bot.say(to, "1 LTC currently trades for " + ltcprice + "BTC on Cryptsy. Therefore, 1 USD is equal to " + ltcusd + "LTC at Bitstamp prices.");
+});
+});
+    }
+});
+
+//XPM Price Check Command
+bot.addListener('message', function(from, to, message) {
+    if(  message.indexOf('!xpm') > -1
+    || message.indexOf('!XPM') > -1
+    || message.indexOf('!Xpm') > -1
+    ) {
+    $.getJSON("http://pubapi.cryptsy.com/api.php?method=singleorderdata&marketid=63", function(data) {
+    var xpm = data;
+    var xpmprice = data["return"].XPM.buyorders[0].price;
+    $.getJSON("https://www.bitstamp.net/api/ticker/", function(data) {
+    var bit = data;
+    var bitprice = data.ask;
+    var mbtcusdinBTC = bitprice*0.00001;
+    var xpmusd = mbtcusdinBTC/xpmprice;
+    xpmusd = xpmusd.toFixed(2);
+    bot.say(to, "1 XPM currently trades for " + xpmprice + "BTC on Cryptsy. Therefore, 1 USD is equal to " + xpmusd + "XPM at Bitstamp prices.");
+});
+});
+    }
+});
+
+//FTC Price Check Command
+bot.addListener('message', function(from, to, message) {
+    if(  message.indexOf('!ftc') > -1
+    || message.indexOf('!FTC') > -1
+    || message.indexOf('!Ftc') > -1
+    ) {
+    $.getJSON("http://pubapi.cryptsy.com/api.php?method=singleorderdata&marketid=5", function(data) {
+    var FTC = data;
+    var FTCprice = data["return"].FTC.buyorders[0].price;
+    $.getJSON("https://www.bitstamp.net/api/ticker/", function(data) {
+    var bit = data;
+    var bitprice = data.ask;
+    var mbtcusdinBTC = bitprice*0.00001;
+    var FTCusd = mbtcusdinBTC/FTCprice;
+    FTCusd = FTCusd.toFixed(2);
+    bot.say(to, "1 FTC currently trades for " + FTCprice + "BTC on Cryptsy. Therefore, 1 USD is equal to " + FTCusd + "FTC at Bitstamp prices.");
 });
 });
     }
